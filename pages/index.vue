@@ -96,7 +96,6 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-//SECTION 1
 const firstSection = ref<HTMLDivElement | null>(null);
 const firstSectionMainImg = ref<HTMLDivElement | null>(null);
 const secondSection = ref<HTMLDivElement | null>(null);
@@ -127,8 +126,6 @@ const updateFirstSectionPos = (progress: number) => {
     });
 };
 
-
-
 const updateSecondSectionPos = (progress: number) => {
     const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
     const translateX =
@@ -156,10 +153,6 @@ const updateSecondSectionPos = (progress: number) => {
         yPercent: -100,
     });
 };
-
-
-
-
 
 onMounted(() => {
     gsap.registerPlugin(ScrollTrigger);
