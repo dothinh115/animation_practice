@@ -103,8 +103,7 @@ const secondSectionMainImg = ref<HTMLDivElement | null>(null);
 let secondSectionDataObj: {
     width: number,
     height: number
-}
-let firstSectionDataObj: {
+}, firstSectionDataObj: {
     width: number,
     height: number
 };
