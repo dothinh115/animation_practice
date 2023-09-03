@@ -89,24 +89,49 @@
                 </div>
             </div>
         </section>
+        <section class="mt-[500px]">
+            <div class="px-16 text-white my-16">
+                <h2 class="text-[45px] font-bold tracking-wide">SECTION 3</h2>
+            </div>
+            <div class="relative">
+                <div class="grid grid-cols-10 grid-rows-4 w-screen h-screen gap-8" v-html="thirdSectionItemsCalc()"
+                    ref="thirdSection">
+                </div>
+                <div class="absolute w-[300px] h-[570px] top-1/2 -translate-y-1/2 left-1/2 bg-white -translate-x-1/2 rounded-[6px] overflow-hidden"
+                    ref="thirdSectionMain">
+                </div>
+            </div>
+
+        </section>
         <section class="h-[5000px]"></section>
     </main>
 </template>
 <script setup lang="ts">
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Flip } from "gsap/Flip";
 
 const firstSection = ref<HTMLDivElement | null>(null);
 const firstSectionMainImg = ref<HTMLDivElement | null>(null);
 const secondSection = ref<HTMLDivElement | null>(null);
 const secondSectionMainImg = ref<HTMLDivElement | null>(null);
+const thirdSection = ref<HTMLDivElement | null>(null);
+const thirdSectionMain = ref<HTMLDivElement | null>(null);
 let secondSectionDataObj: {
     width: number,
     height: number
 }, firstSectionDataObj: {
     width: number,
     height: number
-};
+}, thirdSectionDataObj: {
+    items: number,
+    cols: number,
+    rows: number
+} = {
+        items: 16,
+        cols: 10,
+        rows: 4
+    }
 
 const updateFirstSectionPos = (progress: number) => {
     const widthToUpdate =
@@ -128,9 +153,9 @@ const updateFirstSectionPos = (progress: number) => {
 const updateSecondSectionPos = (progress: number) => {
     const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
     const translateX =
-        (window.innerWidth - secondSectionDataObj.width) * progress * 1.5;
+        (window.innerWidth - secondSectionDataObj.width) * progress * 1.1;
     const translateY =
-        (window.innerHeight - secondSectionDataObj.height) * progress * 1.5;
+        (window.innerHeight - secondSectionDataObj.height) * progress * 1.1;
     gsap.to(secondSectionDivs, {
         scale: 1 + 2.5 * progress,
         filter: `brightness(${1 - 0.5 * progress})`,
@@ -153,8 +178,33 @@ const updateSecondSectionPos = (progress: number) => {
     });
 };
 
+const thirdSectionItemsCalc = () => {
+    let html = '';
+    for (let i = 0; i < thirdSectionDataObj.cols * thirdSectionDataObj.rows; i++) {
+        html += `
+        <div class="h-full w-full rounded-[6px] overflow-hidden item z-[${i}]">
+            </div>
+        `
+    }
+    return html;
+}
+
+const thirdSectionImgsAdd = () => {
+    let posArr: number[] = [];
+    const divArr = thirdSection.value?.querySelectorAll(".item") || [];
+    for (let i = 0; i < thirdSectionDataObj.items; i++) {
+        posArr = [...posArr, i];
+    }
+    for (const position of posArr) {
+        const randomPos = Math.floor(Math.random() * thirdSectionDataObj.cols * thirdSectionDataObj.rows); // 0 - 39
+        divArr[position].innerHTML = (`<img src="../images/3_${position + 1}.jpg" class="h-full w-full object-cover" />`);
+        posArr = posArr.filter(item => item !== position);
+    }
+
+}
+
 onMounted(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, Flip);
     const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
     gsap.set([firstSectionMainImg.value, ...secondSectionDivs], {
         filter: "brightness(1)",
@@ -167,10 +217,14 @@ onMounted(() => {
         width: secondSectionMainImg.value?.offsetWidth || 0,
         height: secondSectionMainImg.value?.offsetHeight || 0,
     }
+
+
+    thirdSectionImgsAdd();
+
     ScrollTrigger.create({
         trigger: firstSection.value,
         start: "center center",
-        end: "4000 center",
+        end: "3000 center",
         toggleActions: "restart none reverse none",
         pin: true,
         onUpdate: (self: {
@@ -181,13 +235,31 @@ onMounted(() => {
     ScrollTrigger.create({
         trigger: secondSection.value,
         start: "center center",
-        end: "4000 center",
+        end: "3000 center",
         toggleActions: "restart none reverse none",
         pin: true,
         onUpdate: (self: {
             progress: number
         }) => updateSecondSectionPos(self.progress),
     });
+
+
+    const thirdSectionDivArr = thirdSection.value?.querySelectorAll(".item img") || [];
+
+    const state = Flip.getState(thirdSectionDivArr[0]);
+
+    Flip.from(state, {
+        absolute: true,
+        delay: 2,
+        ease: "power1.inOut",
+        scale: true
+    });
+
+    document.addEventListener("click", () => {
+        thirdSectionMain.value?.appendChild(thirdSectionDivArr[0]);
+    });
+
+
 })
 
 </script>
