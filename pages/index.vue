@@ -93,8 +93,8 @@
     </main>
 </template>
 <script setup lang="ts">
-import { gsap, ScrollTrigger, } from "gsap/all"
-
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 //SECTION 1
 const firstSection = ref<HTMLDivElement | null>(null);
@@ -192,7 +192,6 @@ onMounted(() => {
         start: "center center",
         end: "4000 center",
         toggleActions: "restart none reverse none",
-        markers: true,
         pin: true,
         onUpdate: (self: {
             progress: number
