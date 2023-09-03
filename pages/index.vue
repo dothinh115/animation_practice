@@ -159,7 +159,6 @@ onMounted(() => {
     gsap.set([firstSectionMainImg.value, ...secondSectionDivs], {
         filter: "brightness(1)",
     });
-    console.log()
     firstSectionDataObj = {
         width: firstSectionMainImg.value?.offsetWidth || 0,
         height: firstSectionMainImg.value?.offsetHeight || 0,
