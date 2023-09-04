@@ -61,7 +61,7 @@
                         <img src="/images/2_3.jpg" class="w-full h-full" />
                     </div>
                     <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_4.jpg" />
+                        <img src="/images/2_4.jpg" class="w-full h-full" />
                     </div>
                     <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit z-50 bg-[url('/images/2_main.jpg')] bg-cover"
                         ref="secondSectionMainImg">
@@ -134,7 +134,7 @@ let secondSectionDataObj: {
         width: number,
         height: number,
         rectTop: number,
-        rectLeft: number
+        rectLeft: number,
     }[]
 } = {
         items: 16,
@@ -260,7 +260,7 @@ onMounted(() => {
             width,
             height,
             rectTop,
-            rectLeft
+            rectLeft,
         }
         thirdSectionDataObj.data.push(data);
     }
