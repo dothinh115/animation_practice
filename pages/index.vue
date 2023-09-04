@@ -117,11 +117,11 @@
                     </div>
                     <div class="moveTo absolute w-[450px] h-[650px] top-0 left-0" v-for="(item, index) in 6" :key="index">
                     </div>
-                    <div class="textMoveTo absolute w-[600px] h-full left-[700px] text-gray-500 flex items-center">
+                    <div class="textMoveTo absolute w-[600px] h-full left-[900px] text-gray-500 flex items-center">
                     </div>
                     <div class="fourthSectionText w-[450px] h-[650px]">
                         <p
-                            class="text-[20px] font-semibold tracking-wide w-[600px] flex items-center h-full -translate-x-[200px]">
+                            class="text-[30px] font-semibold tracking-wide w-[600px] flex items-center h-full -translate-x-[200px]">
                             AI-generated art captivates with varied creations, sometimes senseless, yet impressively
                             enigmatic.
                         </p>
