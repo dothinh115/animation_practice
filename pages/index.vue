@@ -118,9 +118,6 @@ const thirdSectionMain = ref<HTMLDivElement | null>(null);
 let secondSectionDataObj: {
     width: number,
     height: number
-}, firstSectionDataObj: {
-    width: number,
-    height: number
 }, thirdSectionDataObj: {
     items: number,
     cols: number,
@@ -146,23 +143,6 @@ let secondSectionDataObj: {
         mainWidth: 0,
         mainHeight: 0,
     }
-
-const updateFirstSectionPos = (progress: number) => {
-    const widthToUpdate =
-        firstSectionDataObj.width +
-        (window.innerWidth - firstSectionDataObj.width) * progress;
-    const heightToUpdate =
-        firstSectionDataObj.height +
-        (window.innerHeight - firstSectionDataObj.height) * progress;
-    gsap.to(firstSectionMainImg.value, {
-        width: widthToUpdate + "px",
-        height: heightToUpdate + "px",
-        filter: `brightness(${1 - 0.5 * progress})`,
-    });
-    gsap.to(".firstSectionText", {
-        yPercent: -100,
-    });
-};
 
 const updateSecondSectionPos = (progress: number) => {
     const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
@@ -238,10 +218,6 @@ onMounted(() => {
     gsap.set([firstSectionMainImg.value, ...secondSectionDivs], {
         filter: "brightness(1)",
     });
-    firstSectionDataObj = {
-        width: firstSectionMainImg.value?.offsetWidth || 0,
-        height: firstSectionMainImg.value?.offsetHeight || 0,
-    }
     secondSectionDataObj = {
         width: secondSectionMainImg.value?.offsetWidth || 0,
         height: secondSectionMainImg.value?.offsetHeight || 0,
@@ -270,15 +246,18 @@ onMounted(() => {
     thirdSectionDataObj.mainWidth = thirdSectionMain.value?.offsetWidth || 0;
     thirdSectionDataObj.mainHeight = thirdSectionMain.value?.offsetHeight || 0;
 
-    ScrollTrigger.create({
-        trigger: firstSection.value,
-        start: "center center",
-        end: "3000 center",
-        toggleActions: "restart none reverse none",
-        pin: true,
-        onUpdate: (self: {
-            progress: number
-        }) => updateFirstSectionPos(self.progress),
+    gsap.to(firstSectionMainImg.value, {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        filter: 'brightness(0.5)',
+        scrollTrigger: {
+            trigger: firstSection.value,
+            start: "center center",
+            end: "3000 center",
+            toggleActions: "restart none reverse none",
+            pin: true,
+            scrub: 0
+        }
     });
 
     ScrollTrigger.create({
