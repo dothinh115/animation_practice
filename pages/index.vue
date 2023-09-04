@@ -93,14 +93,18 @@
             <div class="px-16 text-white my-16">
                 <h2 class="text-[45px] font-bold tracking-wide">SECTION 3</h2>
             </div>
-            <div class="relative">
-                <div class=" grid grid-cols-10 grid-rows-4 w-screen h-[calc(80vh)] gap-8" v-html="thirdSectionItemsCalc()"
-                    ref="thirdSection">
+            <div class="relative grid grid-cols-10 grid-rows-4 w-screen h-[calc(70vh)] gap-8" ref="thirdSection">
+                <div class="h-full w-full rounded-[6px] overflow-hidden item"
+                    v-for="(item, index) in thirdSectionDataObj.cols * thirdSectionDataObj.rows" :key="index">
                 </div>
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[300px] h-[500px]"
                     ref="thirdSectionMain"></div>
             </div>
-
+            <div class="px-16 text-white thirdSectionText">
+                <p class="text-[60px] font-bold tracking-wide text-center">
+                    The Art of Perfection?
+                </p>
+            </div>
         </section>
         <section class="h-[5000px]"></section>
     </main>
@@ -108,6 +112,8 @@
 <script setup lang="ts">
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Flip } from "gsap/Flip";
+import { random } from "gsap";
 
 const firstSection = ref<HTMLDivElement | null>(null);
 const firstSectionMainImg = ref<HTMLDivElement | null>(null);
@@ -122,26 +128,10 @@ let secondSectionDataObj: {
     items: number,
     cols: number,
     rows: number,
-    mainRectTop: number,
-    mainRectLeft: number,
-    mainWidth: number,
-    mainHeight: number,
-    data: {
-        node: HTMLElement,
-        width: number,
-        height: number,
-        rectTop: number,
-        rectLeft: number,
-    }[]
 } = {
         items: 16,
         cols: 10,
         rows: 4,
-        data: [],
-        mainRectTop: 0,
-        mainRectLeft: 0,
-        mainWidth: 0,
-        mainHeight: 0,
     }
 
 const updateSecondSectionPos = (progress: number) => {
@@ -150,71 +140,50 @@ const updateSecondSectionPos = (progress: number) => {
         (window.innerWidth - secondSectionDataObj.width) * progress * 1.1;
     const translateY =
         (window.innerHeight - secondSectionDataObj.height) * progress * 1.1;
+    const goUpIndex = [0, 1, 2],
+        goLeftIndex = [0, 3, 6],
+        goRightIndex = [2, 5, 8],
+        goDownIndex = [6, 7, 8];
     gsap.to(secondSectionDivs, {
         scale: 1 + 2.5 * progress,
         filter: `brightness(${1 - 0.5 * progress})`,
     });
-    gsap.to([secondSectionDivs[0], secondSectionDivs[3], secondSectionDivs[6]], {
-        x: -translateX + "px",
-    });
-    gsap.to([secondSectionDivs[2], secondSectionDivs[5], secondSectionDivs[8]], {
-        x: translateX + "px",
-    });
-    gsap.to([secondSectionDivs[0], secondSectionDivs[1], secondSectionDivs[2]], {
-        y: -translateY + "px",
-    });
-    gsap.to([secondSectionDivs[6], secondSectionDivs[7], secondSectionDivs[8]], {
-        y: translateY + "px",
-    });
-    gsap.to(".secondSectionText", {
-        y: -window.innerHeight / 2 + "px",
-        yPercent: -100,
-    });
+    for (const index in secondSectionDivs) {
+        gsap.to(secondSectionDivs[index], {
+            ...(goUpIndex.includes(Number(index)) && {
+                y: -translateY + "px",
+            }),
+            ...(goDownIndex.includes(Number(index)) && {
+                y: translateY + "px",
+            }),
+            ...(goLeftIndex.includes(Number(index)) && {
+                x: -translateX + "px",
+            }),
+            ...(goRightIndex.includes(Number(index)) && {
+                x: translateX + "px",
+            })
+        });
+    }
 };
 
-const updateThirdSectionPos = (progress: number) => {
-    for (let i = 0; i < thirdSectionDataObj.data.length; i++) {
-        const item = thirdSectionDataObj.data[i];
-        const xTranslate = (thirdSectionDataObj.mainRectLeft - item.rectLeft) * progress;
-        const yTranslate = (thirdSectionDataObj.mainRectTop - item.rectTop) * progress;
-        const widthToUpdate = (thirdSectionDataObj.mainWidth - item.width) * progress;
-        const heightToUpdate = (thirdSectionDataObj.mainHeight - item.height) * progress;
-        gsap.to(item.node, {
-            position: 'absolute',
-            width: item.width + widthToUpdate,
-            height: item.height + heightToUpdate,
-            x: xTranslate,
-            y: yTranslate,
-        })
-    }
-}
-
-const thirdSectionItemsCalc = (): string => {
-    let html = '';
-    for (let i = 0; i < thirdSectionDataObj.cols * thirdSectionDataObj.rows; i++) {
-        html += `<div class="h-full w-full rounded-[6px] overflow-hidden item"></div>`
-    }
-    return html;
-}
-
 const thirdSectionImgsAdd = () => {
-    let posArr: number[] = [];
     const divArr = thirdSection.value?.querySelectorAll(".item") || [];
-    for (let i = 0; i < thirdSectionDataObj.items; i++) {
-        posArr = [...posArr, i];
-    }
-    for (const position of posArr) {
+    const randomPosition: Set<number> = new Set();
+    while (Array.from(randomPosition).length < 16) {
         const randomPos = Math.floor(Math.random() * thirdSectionDataObj.cols * thirdSectionDataObj.rows); // 0 - 39
-        divArr[randomPos].innerHTML = (`<img src="../images/3_${position + 1}.jpg" class="h-full w-full object-cover rounded-[6px] z-[${randomPos}]" />`);
-        posArr = posArr.filter(item => item !== position);
+        randomPosition.add(randomPos);
     }
-
+    const randomPositionArr = Array.from(randomPosition);
+    for (let position = 0; position < randomPositionArr.length; position++) {
+        divArr[randomPositionArr[position]].innerHTML = (`<img src="../images/3_${position + 1}.jpg" class="h-full w-full object-cover rounded-[6px] z-[${randomPositionArr[position]}]" />`);
+    }
 }
 
 onMounted(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, Flip);
     thirdSectionImgsAdd();
     const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
+    const thirdSectionImgArr = thirdSection.value?.querySelectorAll<HTMLElement>(".item img") || [];
     gsap.set([firstSectionMainImg.value, ...secondSectionDivs], {
         filter: "brightness(1)",
     });
@@ -223,29 +192,7 @@ onMounted(() => {
         height: secondSectionMainImg.value?.offsetHeight || 0,
     }
 
-    const thirdSectionImgArr = thirdSection.value?.querySelectorAll<HTMLElement>(".item img") || [];
-
-    for (const img of thirdSectionImgArr) {
-        const node = img;
-        const width = img.offsetWidth;
-        const height = img.offsetHeight;
-        const rectTop = img.getBoundingClientRect().top;
-        const rectLeft = img.getBoundingClientRect().left;
-        const data = {
-            node,
-            width,
-            height,
-            rectTop,
-            rectLeft,
-        }
-        thirdSectionDataObj.data.push(data);
-    }
-
-    thirdSectionDataObj.mainRectLeft = thirdSectionMain.value?.getBoundingClientRect().left || 0;
-    thirdSectionDataObj.mainRectTop = thirdSectionMain.value?.getBoundingClientRect().top || 0;
-    thirdSectionDataObj.mainWidth = thirdSectionMain.value?.offsetWidth || 0;
-    thirdSectionDataObj.mainHeight = thirdSectionMain.value?.offsetHeight || 0;
-
+    //SECTION 1
     gsap.to(firstSectionMainImg.value, {
         width: window.innerWidth,
         height: window.innerHeight,
@@ -257,9 +204,15 @@ onMounted(() => {
             toggleActions: "restart none reverse none",
             pin: true,
             scrub: 0
+        },
+        onComplete: () => {
+            gsap.to(".firstSectionText", {
+                yPercent: -100
+            })
         }
     });
 
+    //SECTION 2
     ScrollTrigger.create({
         trigger: secondSection.value,
         start: "center center",
@@ -269,18 +222,42 @@ onMounted(() => {
         onUpdate: (self: {
             progress: number
         }) => updateSecondSectionPos(self.progress),
+        onLeave: () => {
+            gsap.to(".secondSectionText", {
+                y: -window.innerHeight / 2 + "px",
+                yPercent: -100,
+            });
+        }
     });
 
-    ScrollTrigger.create({
-        trigger: thirdSection.value,
-        start: "center center",
-        end: "3000 center",
-        toggleActions: "restart none reverse none",
-        pin: true,
-        onUpdate: (self: {
-            progress: number
-        }) => updateThirdSectionPos(self.progress),
+    //SECTION 3
+    const thirdSectionItemState = Flip.getState(thirdSectionImgArr);
+    for (const img of thirdSectionImgArr) {
+        thirdSectionMain.value?.appendChild(img);
+    }
+    Flip.from(thirdSectionItemState, {
+        paused: true,
+        absolute: true,
     });
+    gsap.to(thirdSectionImgArr, {
+        x: 0,
+        y: 0,
+        width: '300px',
+        height: '500px',
+        stagger: {
+            grid: "auto",
+            each: 0.1,
+            from: 'start',
+        },
+        scrollTrigger: {
+            trigger: thirdSection.value,
+            start: "center center",
+            end: "12000 center",
+            toggleActions: "restart none reverse none",
+            pin: true,
+            scrub: 0,
+        }
+    })
 })
 
 </script>
