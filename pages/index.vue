@@ -106,6 +106,31 @@
                 </p>
             </div>
         </section>
+        <section class="mt-[500px]">
+            <div class="px-16 text-white my-16">
+                <h2 class="text-[45px] font-bold tracking-wide">SECTION 4</h2>
+            </div>
+            <div class="relative" ref="fourthSection">
+                <div class="relative flex w-max gap-8 px-8">
+                    <div class="item w-[450px] h-[650px]" v-for="(item, index) in 6" :key="index">
+                        <img :src="`/images/4_${index + 1}.jpg`" class="w-full h-full rounded-[6px]" />
+                    </div>
+                    <div class="moveTo absolute w-[450px] h-[650px] top-0 left-0" v-for="(item, index) in 6" :key="index">
+                    </div>
+                    <div class="textMoveTo absolute w-[600px] h-full left-[700px] text-gray-500 flex items-center">
+                    </div>
+                    <div class="fourthSectionText w-[450px] h-[650px]">
+                        <p
+                            class="text-[20px] font-semibold tracking-wide w-[600px] flex items-center h-full -translate-x-[200px]">
+                            AI-generated art captivates with varied creations, sometimes senseless, yet impressively
+                            enigmatic.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
         <section class="h-[5000px]"></section>
     </main>
 </template>
@@ -113,7 +138,6 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flip } from "gsap/Flip";
-import { random } from "gsap";
 
 const firstSection = ref<HTMLDivElement | null>(null);
 const firstSectionMainImg = ref<HTMLDivElement | null>(null);
@@ -121,6 +145,8 @@ const secondSection = ref<HTMLDivElement | null>(null);
 const secondSectionMainImg = ref<HTMLDivElement | null>(null);
 const thirdSection = ref<HTMLDivElement | null>(null);
 const thirdSectionMain = ref<HTMLDivElement | null>(null);
+const fourthSection = ref<HTMLDivElement | null>(null);
+
 let secondSectionDataObj: {
     width: number,
     height: number
@@ -257,7 +283,56 @@ onMounted(() => {
             pin: true,
             scrub: 0,
         }
-    })
+    });
+
+    //SECTION 4
+    const fourthSectionImgArr = fourthSection.value?.querySelectorAll(".item img") || [];
+    const fourthSectionMoveTo = fourthSection.value?.querySelectorAll(".moveTo") || [];
+    const fourthSectionTextMoveTo = fourthSection.value?.querySelector(".textMoveTo");
+    const fourthSectionText = fourthSection.value?.querySelector(".fourthSectionText p");
+    const fourthSectionItemState = Flip.getState(fourthSectionImgArr);
+    const fourthSectionTextState = Flip.getState(fourthSectionText!);
+
+    for (let i = 0; i < fourthSectionMoveTo.length; i++) {
+        fourthSectionMoveTo[i].appendChild(fourthSectionImgArr[i]);
+        gsap.set(fourthSectionMoveTo[i], {
+            x: 32 * (i + 1) + 'px',
+            zIndex: (fourthSectionMoveTo.length - i),
+            filter: 'brightness(1)'
+        });
+    }
+    fourthSectionTextMoveTo?.appendChild(fourthSectionText!);
+    Flip.from(fourthSectionItemState, {
+        paused: true,
+        absolute: true
+    });
+    Flip.from(fourthSectionTextState, {
+        paused: true,
+        absolute: true
+    });
+
+    gsap.to([...fourthSectionImgArr, fourthSectionText!], {
+        x: 0,
+        y: 0,
+        scrollTrigger: {
+            trigger: fourthSection.value,
+            start: "center center",
+            end: "5000 center",
+            toggleActions: "restart none reverse none",
+            pin: true,
+            scrub: 0,
+            onUpdate: (self: {
+                progress: number
+            }) => {
+                for (let i = 0; i < fourthSectionMoveTo.length; i++) {
+                    gsap.to(fourthSectionMoveTo[i], {
+                        filter: `brightness(${i === 0 ? 1 : (1 - i / fourthSectionMoveTo.length) + 0.1 * self.progress})`
+                    });
+                }
+
+            }
+        },
+    });
 })
 
 </script>
