@@ -1,138 +1,169 @@
 <template>
-    <main class="overflow-x-hidden bg-slate-900">
-        <section>
-            <div class="pt-[50px] min-h-[1000px] px-16 text-white">
-                <h1 class="text-[45px] font-bold tracking-wide">GSAP PRACTICE</h1>
-            </div>
-        </section>
-        <section>
-            <div class="px-16 text-white my-16">
-                <h2 class="text-[45px] font-bold tracking-wide">SECTION 1</h2>
-            </div>
-            <div class="relative">
-                <div class="flex justify-center items-center gap-8" ref="firstSection">
-                    <div class="min-w-[123px] h-[185px] rounded-[6px] overflow-hidden">
-                        <img src="/images/1_1.jpg" class="w-full h-full object-cover" />
-                    </div>
-                    <div class="min-w-[155px] h-[232px] rounded-[6px] overflow-hidden">
-                        <img src="/images/1_2.jpg" class="w-full h-full object-cover" />
-                    </div>
-                    <div class="min-w-[310px] h-[465px] rounded-[6px] overflow-hidden">
-                        <img src="/images/1_3.jpg" class="w-full h-full object-cover" />
-                    </div>
-                    <div class="w-[465px] h-[650px] min-h-[650px] aspect-w-3 aspect-h-5 rounded-[6px] overflow-hidden flex-shrink-0"
-                        ref="firstSectionMainImg">
-                        <img src="/images/1_main.jpg" class="w-full h-full object-cover" />
-                    </div>
-                    <div class="min-w-[310px] h-[465px] rounded-[6px] overflow-hidden">
-                        <img src="/images/1_4.jpg" class="w-full h-full object-cover" />
-                    </div>
-                    <div class="min-w-[155px] h-[232px] rounded-[6px] overflow-hidden">
-                        <img src="/images/1_5.jpg" class="w-full h-full object-cover" />
-                    </div>
-                    <div class="min-w-[123px] h-[185px] rounded-[6px] overflow-hidden">
-                        <img src="/images/1_6.jpg" class="w-full h-full object-cover" />
-                    </div>
-                </div>
-                <div class="px-16 text-white firstSectionText">
-                    <p class="text-[20px] font-semibold tracking-wide w-[450px]">
-                        Within this meticulously arranged AI-generated ensemble lies a
-                        tantalizing facade, captivating our gaze. Yet, as we search for
-                        the soul of human expression, we question whether algorithms can
-                        truly embody the essence of authentic art.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <section class="mt-[500px]">
-            <div class="px-16 text-white my-16">
-                <h2 class="text-[45px] font-bold tracking-wide">SECTION 2</h2>
-            </div>
-            <div class="relative">
-                <div class="w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] overflow-hidden"
-                    ref="secondSection">
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_1.jpg" class="w-full h-full" />
-                    </div>
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_2.jpg" class="w-full h-full" />
-                    </div>
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_3.jpg" class="w-full h-full" />
-                    </div>
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_4.jpg" class="w-full h-full" />
-                    </div>
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit z-50 bg-[url('/images/2_main.jpg')] bg-cover"
-                        ref="secondSectionMainImg">
-                    </div>
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_5.jpg" class="w-full h-full" />
-                    </div>
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_6.jpg" class="w-full h-full" />
-                    </div>
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_7.jpg" class="w-full h-full" />
-                    </div>
-                    <div class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit">
-                        <img src="/images/2_8.jpg" class="w-full h-full" />
-                    </div>
-                </div>
-                <div class="px-16 text-white secondSectionText">
-                    <p class="text-[20px] font-semibold tracking-wide w-[450px]">
-                        Within this meticulously arranged AI-generated ensemble lies a
-                        tantalizing facade, captivating our gaze. Yet, as we search for
-                        the soul of human expression, we question whether algorithms can
-                        truly embody the essence of authentic art.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <section class="mt-[500px]">
-            <div class="px-16 text-white my-16">
-                <h2 class="text-[45px] font-bold tracking-wide">SECTION 3</h2>
-            </div>
-            <div class="relative grid grid-cols-10 grid-rows-4 w-screen h-[calc(70vh)] gap-8" ref="thirdSection">
-                <div class="h-full w-full rounded-[6px] overflow-hidden item"
-                    v-for="(item, index) in thirdSectionDataObj.cols * thirdSectionDataObj.rows" :key="index">
-                </div>
-                <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[300px] h-[500px]"
-                    ref="thirdSectionMain"></div>
-            </div>
-            <div class="px-16 text-white thirdSectionText">
-                <p class="text-[60px] font-bold tracking-wide text-center">
-                    The Art of Perfection?
-                </p>
-            </div>
-        </section>
-        <section class="mt-[500px]">
-            <div class="px-16 text-white my-16">
-                <h2 class="text-[45px] font-bold tracking-wide">SECTION 4</h2>
-            </div>
-            <div class="relative" ref="fourthSection">
-                <div class="relative flex w-max gap-8 px-8">
-                    <div class="item w-[450px] h-[650px]" v-for="(item, index) in 6" :key="index">
-                        <img :src="`/images/4_${index + 1}.jpg`" class="w-full h-full rounded-[6px]" />
-                    </div>
-                    <div class="moveTo absolute w-[450px] h-[650px] top-0 left-0" v-for="(item, index) in 6" :key="index">
-                    </div>
-                    <div class="textMoveTo absolute w-[600px] h-full left-[900px] text-gray-500 flex items-center">
-                    </div>
-                    <div class="fourthSectionText w-[450px] h-[650px]">
-                        <p
-                            class="text-[30px] font-semibold tracking-wide w-[600px] flex items-center h-full -translate-x-[200px]">
-                            AI-generated art captivates with varied creations, sometimes senseless, yet impressively
-                            enigmatic.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-        <section class="h-[5000px]"></section>
-    </main>
+  <main class="overflow-x-hidden bg-slate-900">
+    <section>
+      <div class="pt-[50px] min-h-[1000px] px-16 text-white">
+        <h1 class="text-[45px] font-bold tracking-wide">GSAP PRACTICE</h1>
+      </div>
+    </section>
+    <section>
+      <div class="px-16 text-white my-16">
+        <h2 class="text-[45px] font-bold tracking-wide">SECTION 1</h2>
+      </div>
+      <div class="relative">
+        <div class="flex justify-center items-center gap-8" ref="firstSection">
+          <div class="min-w-[123px] h-[185px] rounded-[6px] overflow-hidden">
+            <img src="/images/1_1.jpg" class="w-full h-full object-cover" />
+          </div>
+          <div class="min-w-[155px] h-[232px] rounded-[6px] overflow-hidden">
+            <img src="/images/1_2.jpg" class="w-full h-full object-cover" />
+          </div>
+          <div class="min-w-[310px] h-[465px] rounded-[6px] overflow-hidden">
+            <img src="/images/1_3.jpg" class="w-full h-full object-cover" />
+          </div>
+          <div
+            class="w-[465px] h-[650px] min-h-[650px] aspect-w-3 aspect-h-5 rounded-[6px] overflow-hidden flex-shrink-0"
+            ref="firstSectionMainImg"
+          >
+            <img src="/images/1_main.jpg" class="w-full h-full object-cover" />
+          </div>
+          <div class="min-w-[310px] h-[465px] rounded-[6px] overflow-hidden">
+            <img src="/images/1_4.jpg" class="w-full h-full object-cover" />
+          </div>
+          <div class="min-w-[155px] h-[232px] rounded-[6px] overflow-hidden">
+            <img src="/images/1_5.jpg" class="w-full h-full object-cover" />
+          </div>
+          <div class="min-w-[123px] h-[185px] rounded-[6px] overflow-hidden">
+            <img src="/images/1_6.jpg" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <div class="px-16 text-white firstSectionText">
+          <p class="text-[20px] font-semibold tracking-wide w-[450px]">
+            Within this meticulously arranged AI-generated ensemble lies a
+            tantalizing facade, captivating our gaze. Yet, as we search for the
+            soul of human expression, we question whether algorithms can truly
+            embody the essence of authentic art.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="mt-[500px]">
+      <div class="px-16 text-white my-16">
+        <h2 class="text-[45px] font-bold tracking-wide">SECTION 2</h2>
+      </div>
+      <div class="relative">
+        <div
+          class="w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] overflow-hidden"
+          ref="secondSection"
+        >
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
+          >
+            <img src="/images/2_1.jpg" class="w-full h-full" />
+          </div>
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
+          >
+            <img src="/images/2_2.jpg" class="w-full h-full" />
+          </div>
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
+          >
+            <img src="/images/2_3.jpg" class="w-full h-full" />
+          </div>
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
+          >
+            <img src="/images/2_4.jpg" class="w-full h-full" />
+          </div>
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit z-50 bg-[url('/images/2_main.jpg')] bg-cover"
+            ref="secondSectionMainImg"
+          ></div>
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
+          >
+            <img src="/images/2_5.jpg" class="w-full h-full" />
+          </div>
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
+          >
+            <img src="/images/2_6.jpg" class="w-full h-full" />
+          </div>
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
+          >
+            <img src="/images/2_7.jpg" class="w-full h-full" />
+          </div>
+          <div
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
+          >
+            <img src="/images/2_8.jpg" class="w-full h-full" />
+          </div>
+        </div>
+        <div class="px-16 text-white secondSectionText">
+          <p class="text-[20px] font-semibold tracking-wide w-[450px]">
+            Within this meticulously arranged AI-generated ensemble lies a
+            tantalizing facade, captivating our gaze. Yet, as we search for the
+            soul of human expression, we question whether algorithms can truly
+            embody the essence of authentic art.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="mt-[500px]">
+      <div class="px-16 text-white my-16">
+        <h2 class="text-[45px] font-bold tracking-wide">SECTION 3</h2>
+      </div>
+      <div
+        class="relative grid grid-cols-10 grid-rows-4 w-screen h-[calc(70vh)] gap-8"
+        ref="thirdSection"
+      >
+        <div
+          class="h-full w-full rounded-[6px] overflow-hidden item"
+          v-for="(item, index) in thirdSectionDataObj.cols *
+          thirdSectionDataObj.rows"
+          :key="index"
+        ></div>
+        <div
+          class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[300px] h-[500px]"
+          ref="thirdSectionMain"
+        ></div>
+      </div>
+      <div class="px-16 text-white thirdSectionText">
+        <p class="text-[60px] font-bold tracking-wide text-center">
+          The Art of Perfection?
+        </p>
+      </div>
+    </section>
+    <section class="mt-[500px]">
+      <div class="px-16 text-white my-16">
+        <h2 class="text-[45px] font-bold tracking-wide">SECTION 4</h2>
+      </div>
+      <div class="relative" ref="fourthSection">
+        <div class="relative flex w-max gap-8 px-8">
+          <div
+            class="relative item w-[450px] h-[650px]"
+            v-for="(item, index) in 6"
+            :key="index"
+          >
+            <img
+              :src="`/images/4_${index + 1}.jpg`"
+              class="w-full h-full rounded-[6px]"
+            />
+          </div>
+          <div class="fourthSectionText w-[450px] h-[650px]">
+            <p
+              class="text-[30px] font-semibold tracking-wide w-[600px] flex items-center h-full -translate-x-[200px] text-gray-500"
+            >
+              AI-generated art captivates with varied creations, sometimes
+              senseless, yet impressively enigmatic.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="h-[5000px]"></section>
+  </main>
 </template>
 <script setup lang="ts">
 import { gsap } from "gsap";
@@ -148,191 +179,207 @@ const thirdSectionMain = ref<HTMLDivElement | null>(null);
 const fourthSection = ref<HTMLDivElement | null>(null);
 
 let secondSectionDataObj: {
-    width: number,
-    height: number
-}, thirdSectionDataObj: {
-    items: number,
-    cols: number,
-    rows: number,
-} = {
-        items: 16,
-        cols: 10,
-        rows: 4,
-    }
+    width: number;
+    height: number;
+  },
+  thirdSectionDataObj: {
+    items: number;
+    cols: number;
+    rows: number;
+  } = {
+    items: 16,
+    cols: 10,
+    rows: 4,
+  };
 
 const updateSecondSectionPos = (progress: number) => {
-    const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
-    const translateX =
-        (window.innerWidth - secondSectionDataObj.width) * progress * 1.1;
-    const translateY =
-        (window.innerHeight - secondSectionDataObj.height) * progress * 1.1;
-    const goUpIndex = [0, 1, 2],
-        goLeftIndex = [0, 3, 6],
-        goRightIndex = [2, 5, 8],
-        goDownIndex = [6, 7, 8];
-    gsap.to(secondSectionDivs, {
-        scale: 1 + 2.5 * progress,
-        filter: `brightness(${1 - 0.5 * progress})`,
+  const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
+  const translateX =
+    (window.innerWidth - secondSectionDataObj.width) * progress * 1.1;
+  const translateY =
+    (window.innerHeight - secondSectionDataObj.height) * progress * 1.1;
+  const goUpIndex = [0, 1, 2],
+    goLeftIndex = [0, 3, 6],
+    goRightIndex = [2, 5, 8],
+    goDownIndex = [6, 7, 8];
+  gsap.to(secondSectionDivs, {
+    scale: 1 + 2.5 * progress,
+    filter: `brightness(${1 - 0.5 * progress})`,
+  });
+  for (const index in secondSectionDivs) {
+    gsap.to(secondSectionDivs[index], {
+      ...(goUpIndex.includes(Number(index)) && {
+        y: -translateY + "px",
+      }),
+      ...(goDownIndex.includes(Number(index)) && {
+        y: translateY + "px",
+      }),
+      ...(goLeftIndex.includes(Number(index)) && {
+        x: -translateX + "px",
+      }),
+      ...(goRightIndex.includes(Number(index)) && {
+        x: translateX + "px",
+      }),
     });
-    for (const index in secondSectionDivs) {
-        gsap.to(secondSectionDivs[index], {
-            ...(goUpIndex.includes(Number(index)) && {
-                y: -translateY + "px",
-            }),
-            ...(goDownIndex.includes(Number(index)) && {
-                y: translateY + "px",
-            }),
-            ...(goLeftIndex.includes(Number(index)) && {
-                x: -translateX + "px",
-            }),
-            ...(goRightIndex.includes(Number(index)) && {
-                x: translateX + "px",
-            })
-        });
-    }
+  }
 };
 
 const thirdSectionImgsAdd = () => {
-    const divArr = thirdSection.value?.querySelectorAll(".item") || [];
-    const randomPosition: Set<number> = new Set();
-    while (Array.from(randomPosition).length < 16) {
-        const randomPos = Math.floor(Math.random() * thirdSectionDataObj.cols * thirdSectionDataObj.rows); // 0 - 39
-        randomPosition.add(randomPos);
-    }
-    const randomPositionArr = Array.from(randomPosition);
-    for (let position = 0; position < randomPositionArr.length; position++) {
-        divArr[randomPositionArr[position]].innerHTML = (`<img src="../images/3_${position + 1}.jpg" class="h-full w-full object-cover rounded-[6px] z-[${randomPositionArr[position]}]" />`);
-    }
-}
+  const divArr = thirdSection.value?.querySelectorAll(".item") || [];
+  const randomPosition: Set<number> = new Set();
+  while (Array.from(randomPosition).length < 16) {
+    const randomPos = Math.floor(
+      Math.random() * thirdSectionDataObj.cols * thirdSectionDataObj.rows
+    ); // 0 - 39
+    randomPosition.add(randomPos);
+  }
+  const randomPositionArr = Array.from(randomPosition);
+  for (let position = 0; position < randomPositionArr.length; position++) {
+    divArr[randomPositionArr[position]].innerHTML = `<img src="../images/3_${
+      position + 1
+    }.jpg" class="h-full w-full object-cover rounded-[6px] z-[${
+      randomPositionArr[position]
+    }]" />`;
+  }
+};
 
 onMounted(() => {
-    gsap.registerPlugin(ScrollTrigger, Flip);
-    thirdSectionImgsAdd();
-    const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
-    const thirdSectionImgArr = thirdSection.value?.querySelectorAll<HTMLElement>(".item img") || [];
-    gsap.set([firstSectionMainImg.value, ...secondSectionDivs], {
-        filter: "brightness(1)",
-    });
-    secondSectionDataObj = {
-        width: secondSectionMainImg.value?.offsetWidth || 0,
-        height: secondSectionMainImg.value?.offsetHeight || 0,
-    }
+  gsap.registerPlugin(ScrollTrigger, Flip);
+  thirdSectionImgsAdd();
+  const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
+  const thirdSectionImgArr =
+    thirdSection.value?.querySelectorAll<HTMLElement>(".item img") || [];
+  gsap.set([firstSectionMainImg.value, ...secondSectionDivs], {
+    filter: "brightness(1)",
+  });
+  secondSectionDataObj = {
+    width: secondSectionMainImg.value?.offsetWidth || 0,
+    height: secondSectionMainImg.value?.offsetHeight || 0,
+  };
 
-    //SECTION 1
-    gsap.to(firstSectionMainImg.value, {
-        width: window.innerWidth,
-        height: window.innerHeight,
-        filter: 'brightness(0.5)',
-        scrollTrigger: {
-            trigger: firstSection.value,
-            start: "center center",
-            end: "3000 center",
-            toggleActions: "restart none reverse none",
-            pin: true,
-            scrub: 0
-        },
-        onComplete: () => {
-            gsap.to(".firstSectionText", {
-                yPercent: -100
-            })
-        }
-    });
+  //SECTION 1
+  gsap.to(firstSectionMainImg.value, {
+    width: window.innerWidth,
+    height: window.innerHeight,
+    filter: "brightness(0.5)",
+    scrollTrigger: {
+      trigger: firstSection.value,
+      start: "center center",
+      end: "3000 center",
+      toggleActions: "restart none reverse none",
+      pin: true,
+      scrub: 0,
+    },
+    onComplete: () => {
+      gsap.to(".firstSectionText", {
+        yPercent: -100,
+      });
+    },
+  });
 
-    //SECTION 2
-    ScrollTrigger.create({
-        trigger: secondSection.value,
-        start: "center center",
-        end: "3000 center",
-        toggleActions: "restart none reverse none",
-        pin: true,
-        onUpdate: (self: {
-            progress: number
-        }) => updateSecondSectionPos(self.progress),
-        onLeave: () => {
-            gsap.to(".secondSectionText", {
-                y: -window.innerHeight / 2 + "px",
-                yPercent: -100,
-            });
-        }
-    });
+  //SECTION 2
+  ScrollTrigger.create({
+    trigger: secondSection.value,
+    start: "center center",
+    end: "3000 center",
+    toggleActions: "restart none reverse none",
+    pin: true,
+    onUpdate: (self: { progress: number }) =>
+      updateSecondSectionPos(self.progress),
+    onLeave: () => {
+      gsap.to(".secondSectionText", {
+        y: -window.innerHeight / 2 + "px",
+        yPercent: -100,
+      });
+    },
+  });
 
-    //SECTION 3
-    const thirdSectionItemState = Flip.getState(thirdSectionImgArr);
-    for (const img of thirdSectionImgArr) {
-        thirdSectionMain.value?.appendChild(img);
-    }
-    Flip.from(thirdSectionItemState, {
-        paused: true,
-        absolute: true,
-    });
-    gsap.to(thirdSectionImgArr, {
-        x: 0,
-        y: 0,
-        width: '300px',
-        height: '500px',
-        stagger: {
-            grid: "auto",
-            each: 0.1,
-            from: 'start',
-        },
-        scrollTrigger: {
-            trigger: thirdSection.value,
-            start: "center center",
-            end: "12000 center",
-            toggleActions: "restart none reverse none",
-            pin: true,
-            scrub: 0,
-        }
-    });
+  //SECTION 3
+  const thirdSectionItemState = Flip.getState(thirdSectionImgArr);
+  for (const img of thirdSectionImgArr) {
+    thirdSectionMain.value?.appendChild(img);
+  }
+  Flip.from(thirdSectionItemState, {
+    paused: true,
+    absolute: true,
+  });
+  gsap.to(thirdSectionImgArr, {
+    x: 0,
+    y: 0,
+    width: "300px",
+    height: "500px",
+    stagger: {
+      grid: "auto",
+      each: 0.1,
+      from: "start",
+    },
+    scrollTrigger: {
+      trigger: thirdSection.value,
+      start: "center center",
+      end: "12000 center",
+      toggleActions: "restart none reverse none",
+      pin: true,
+      scrub: 0,
+    },
+  });
 
-    //SECTION 4
-    const fourthSectionImgArr = fourthSection.value?.querySelectorAll(".item img") || [];
-    const fourthSectionMoveTo = fourthSection.value?.querySelectorAll(".moveTo") || [];
-    const fourthSectionTextMoveTo = fourthSection.value?.querySelector(".textMoveTo");
-    const fourthSectionText = fourthSection.value?.querySelector(".fourthSectionText p");
-    const fourthSectionItemState = Flip.getState(fourthSectionImgArr);
-    const fourthSectionTextState = Flip.getState(fourthSectionText!);
+  //SECTION 4
+  const fourthSectionImgArr =
+    fourthSection.value?.querySelectorAll(".item img") || [];
+  const fourthSectionText = fourthSection.value?.querySelector(
+    ".fourthSectionText p"
+  );
+  const fourthSectionItemState = Flip.getState(fourthSectionImgArr);
+  const fourthSectionTextState = Flip.getState(fourthSectionText!);
 
-    for (let i = 0; i < fourthSectionMoveTo.length; i++) {
-        fourthSectionMoveTo[i].appendChild(fourthSectionImgArr[i]);
-        gsap.set(fourthSectionMoveTo[i], {
-            x: 32 * (i + 1) + 'px',
-            zIndex: (fourthSectionMoveTo.length - i),
-            filter: 'brightness(1)'
-        });
-    }
-    fourthSectionTextMoveTo?.appendChild(fourthSectionText!);
-    Flip.from(fourthSectionItemState, {
-        paused: true,
-        absolute: true
+  for (let i = 0; i < fourthSectionImgArr.length; i++) {
+    fourthSection.value
+      ?.querySelectorAll(".item")[0]
+      .appendChild(fourthSectionImgArr[i]);
+    gsap.set(fourthSectionImgArr[i], {
+      zIndex: fourthSectionImgArr.length - i,
+      filter: "brightness(1)",
     });
-    Flip.from(fourthSectionTextState, {
-        paused: true,
-        absolute: true
-    });
+  }
+  fourthSection.value
+    ?.querySelectorAll(".item")[0]
+    ?.appendChild(fourthSectionText!);
+  Flip.from(fourthSectionItemState, {
+    paused: true,
+    absolute: true,
+  });
+  Flip.from(fourthSectionTextState, {
+    paused: true,
+    absolute: true,
+  });
 
-    gsap.to([...fourthSectionImgArr, fourthSectionText!], {
-        x: 0,
-        y: 0,
-        scrollTrigger: {
-            trigger: fourthSection.value,
-            start: "center center",
-            end: "5000 center",
-            toggleActions: "restart none reverse none",
-            pin: true,
-            scrub: 0,
-            onUpdate: (self: {
-                progress: number
-            }) => {
-                for (let i = 0; i < fourthSectionMoveTo.length; i++) {
-                    gsap.to(fourthSectionMoveTo[i], {
-                        filter: `brightness(${i === 0 ? 1 : (1 - i / fourthSectionMoveTo.length) + 0.1 * self.progress})`
-                    });
-                }
+  const fourthSectionTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: fourthSection.value,
+      start: "center center",
+      end: "5000 center",
+      toggleActions: "restart none reverse none",
+      pin: true,
+      scrub: 0,
+    },
+  });
 
-            }
-        },
-    });
-})
-
+  for (let i = 0; i < fourthSectionImgArr.length; i++) {
+    fourthSectionTimeline.to(
+      fourthSectionImgArr[i],
+      {
+        x: i * 32,
+        filter: `brightness(${1 - i * 0.1})`,
+      },
+      "<"
+    );
+  }
+  fourthSectionTimeline.to(
+    fourthSectionText!,
+    {
+      x: 800,
+    },
+    "<"
+  );
+});
 </script>
