@@ -10,7 +10,7 @@
         <h2 class="text-[45px] font-bold tracking-wide">SECTION 1</h2>
       </div>
       <div class="relative">
-        <div class="flex justify-center items-center gap-8" ref="firstSection">
+        <div class="flex justify-center items-center gap-8 firstSection">
           <div class="min-w-[123px] h-[185px] rounded-[6px] overflow-hidden">
             <img src="/images/1_1.jpg" class="w-full h-full object-cover" />
           </div>
@@ -21,8 +21,7 @@
             <img src="/images/1_3.jpg" class="w-full h-full object-cover" />
           </div>
           <div
-            class="w-[465px] h-[650px] min-h-[650px] aspect-w-3 aspect-h-5 rounded-[6px] overflow-hidden flex-shrink-0"
-            ref="firstSectionMainImg"
+            class="w-[465px] h-[650px] min-h-[650px] aspect-w-3 aspect-h-5 rounded-[6px] overflow-hidden flex-shrink-0 firstSectionMainImg"
           >
             <img src="/images/1_main.jpg" class="w-full h-full object-cover" />
           </div>
@@ -52,8 +51,7 @@
       </div>
       <div class="relative">
         <div
-          class="w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] overflow-hidden"
-          ref="secondSection"
+          class="w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] overflow-hidden secondSection"
         >
           <div
             class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
@@ -76,8 +74,7 @@
             <img src="/images/2_4.jpg" class="w-full h-full" />
           </div>
           <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit z-50 bg-[url('/images/2_main.jpg')] bg-cover"
-            ref="secondSectionMainImg"
+            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit z-50 bg-[url('/images/2_main.jpg')] bg-cover secondSectionMainImg"
           ></div>
           <div
             class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
@@ -115,8 +112,7 @@
         <h2 class="text-[45px] font-bold tracking-wide">SECTION 3</h2>
       </div>
       <div
-        class="relative grid grid-cols-10 grid-rows-4 w-screen h-[calc(70vh)] gap-8"
-        ref="thirdSection"
+        class="relative grid grid-cols-10 grid-rows-4 w-screen h-[calc(70vh)] gap-8 thirdSection"
       >
         <div
           class="h-full w-full rounded-[6px] overflow-hidden item"
@@ -125,12 +121,13 @@
           :key="index"
         ></div>
         <div
-          class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[300px] h-[500px]"
-          ref="thirdSectionMain"
+          class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[300px] h-[500px] thirdSectionMain"
         ></div>
       </div>
-      <div class="px-16 text-white thirdSectionText">
-        <p class="text-[60px] font-bold tracking-wide text-center">
+      <div class="px-16 text-white thirdSectionText h-[500px]">
+        <p
+          class="text-[60px] font-bold tracking-wide text-center h-full flex items-center justify-center"
+        >
           The Art of Perfection?
         </p>
       </div>
@@ -139,7 +136,7 @@
       <div class="px-16 text-white my-16">
         <h2 class="text-[45px] font-bold tracking-wide">SECTION 4</h2>
       </div>
-      <div class="relative" ref="fourthSection">
+      <div class="relative fourthSection">
         <div class="relative flex w-max gap-8 px-8">
           <div
             class="relative item w-[450px] h-[650px]"
@@ -170,14 +167,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flip } from "gsap/Flip";
 
-const firstSection = ref<HTMLDivElement | null>(null);
-const firstSectionMainImg = ref<HTMLDivElement | null>(null);
-const secondSection = ref<HTMLDivElement | null>(null);
-const secondSectionMainImg = ref<HTMLDivElement | null>(null);
-const thirdSection = ref<HTMLDivElement | null>(null);
-const thirdSectionMain = ref<HTMLDivElement | null>(null);
-const fourthSection = ref<HTMLDivElement | null>(null);
-
 let secondSectionDataObj: {
     width: number;
     height: number;
@@ -193,7 +182,8 @@ let secondSectionDataObj: {
   };
 
 const updateSecondSectionPos = (progress: number) => {
-  const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
+  const secondSectionDivs =
+    document.querySelectorAll(".secondSection div") || [];
   const translateX =
     (window.innerWidth - secondSectionDataObj.width) * progress * 1.1;
   const translateY =
@@ -225,7 +215,7 @@ const updateSecondSectionPos = (progress: number) => {
 };
 
 const thirdSectionImgsAdd = () => {
-  const divArr = thirdSection.value?.querySelectorAll(".item") || [];
+  const divArr = document.querySelectorAll(".thirdSection .item") || [];
   const randomPosition: Set<number> = new Set();
   while (Array.from(randomPosition).length < 16) {
     const randomPos = Math.floor(
@@ -246,24 +236,29 @@ const thirdSectionImgsAdd = () => {
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, Flip);
   thirdSectionImgsAdd();
-  const secondSectionDivs = secondSection.value?.querySelectorAll("div") || [];
+  const secondSectionDivs =
+    document.querySelectorAll(".secondSection div") || [];
   const thirdSectionImgArr =
-    thirdSection.value?.querySelectorAll<HTMLElement>(".item img") || [];
-  gsap.set([firstSectionMainImg.value, ...secondSectionDivs], {
+    document.querySelectorAll(".thirdSection .item img") || [];
+  gsap.set([".firstSectionMainImg", ...secondSectionDivs], {
     filter: "brightness(1)",
   });
   secondSectionDataObj = {
-    width: secondSectionMainImg.value?.offsetWidth || 0,
-    height: secondSectionMainImg.value?.offsetHeight || 0,
+    width:
+      document.querySelector<HTMLElement>(".secondSectionMainImg")
+        ?.offsetWidth || 0,
+    height:
+      document.querySelector<HTMLElement>(".secondSectionMainImg")
+        ?.offsetHeight || 0,
   };
 
   //SECTION 1
-  gsap.to(firstSectionMainImg.value, {
+  gsap.to(".firstSectionMainImg", {
     width: window.innerWidth,
     height: window.innerHeight,
     filter: "brightness(0.5)",
     scrollTrigger: {
-      trigger: firstSection.value,
+      trigger: ".firstSection",
       start: "center center",
       end: "3000 center",
       toggleActions: "restart none reverse none",
@@ -279,7 +274,7 @@ onMounted(() => {
 
   //SECTION 2
   ScrollTrigger.create({
-    trigger: secondSection.value,
+    trigger: ".secondSection",
     start: "center center",
     end: "3000 center",
     toggleActions: "restart none reverse none",
@@ -297,7 +292,7 @@ onMounted(() => {
   //SECTION 3
   const thirdSectionItemState = Flip.getState(thirdSectionImgArr);
   for (const img of thirdSectionImgArr) {
-    thirdSectionMain.value?.appendChild(img);
+    document.querySelector(".thirdSectionMain")?.appendChild(img);
   }
   Flip.from(thirdSectionItemState, {
     paused: true,
@@ -314,35 +309,40 @@ onMounted(() => {
       from: "start",
     },
     scrollTrigger: {
-      trigger: thirdSection.value,
+      trigger: ".thirdSection",
       start: "center center",
       end: "12000 center",
       toggleActions: "restart none reverse none",
       pin: true,
       scrub: 0,
     },
+    onComplete: () => {
+      gsap.to(".thirdSectionText", {
+        yPercent: -100,
+      });
+    },
   });
 
   //SECTION 4
   const fourthSectionImgArr =
-    fourthSection.value?.querySelectorAll(".item img") || [];
-  const fourthSectionText = fourthSection.value?.querySelector(
-    ".fourthSectionText p"
+    document.querySelectorAll(".fourthSection .item img") || [];
+  const fourthSectionText = document.querySelector(
+    ".fourthSection .fourthSectionText p"
   );
   const fourthSectionItemState = Flip.getState(fourthSectionImgArr);
   const fourthSectionTextState = Flip.getState(fourthSectionText!);
 
   for (let i = 0; i < fourthSectionImgArr.length; i++) {
-    fourthSection.value
-      ?.querySelectorAll(".item")[0]
+    document
+      ?.querySelectorAll(".fourthSection .item")[0]
       .appendChild(fourthSectionImgArr[i]);
     gsap.set(fourthSectionImgArr[i], {
       zIndex: fourthSectionImgArr.length - i,
       filter: "brightness(1)",
     });
   }
-  fourthSection.value
-    ?.querySelectorAll(".item")[0]
+  document
+    ?.querySelectorAll(".fourthSection .item")[0]
     ?.appendChild(fourthSectionText!);
   Flip.from(fourthSectionItemState, {
     paused: true,
@@ -355,7 +355,7 @@ onMounted(() => {
 
   const fourthSectionTimeline = gsap.timeline({
     scrollTrigger: {
-      trigger: fourthSection.value,
+      trigger: ".fourthSection",
       start: "center center",
       end: "5000 center",
       toggleActions: "restart none reverse none",
