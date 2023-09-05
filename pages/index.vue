@@ -145,7 +145,7 @@
           >
             <img
               :src="`/images/4_${index + 1}.jpg`"
-              class="w-full h-full rounded-[6px]"
+              class="w-full h-full rounded-[32px]"
             />
           </div>
           <div class="fourthSectionText w-[450px] h-[650px]">
@@ -159,6 +159,95 @@
         </div>
       </div>
     </section>
+
+    <section class="mt-[500px]">
+      <div class="px-16 text-white my-16">
+        <h2 class="text-[45px] font-bold tracking-wide">SECTION 5</h2>
+      </div>
+      <div class="relative fifthSection">
+        <div class="relative flex w-max gap-8 px-8">
+          <div
+            class="relative item w-[450px] h-[650px]"
+            v-for="(item, index) in 6"
+            :key="index"
+          >
+            <img
+              :src="`/images/3_${index + 1}.jpg`"
+              class="w-full h-full rounded-[32px]"
+            />
+          </div>
+          <div class="fifthSectionText w-[450px] h-[650px]">
+            <p
+              class="text-[30px] font-semibold tracking-wide w-[600px] flex items-center h-full -translate-x-[200px] text-gray-500"
+            >
+              AI-generated art captivates with varied creations, sometimes
+              senseless, yet impressively enigmatic.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-[500px]">
+      <div class="px-16 text-white my-16">
+        <h2 class="text-[45px] font-bold tracking-wide">SECTION 6</h2>
+      </div>
+      <div class="relative sixthSection">
+        <div class="relative flex w-max gap-8 px-8">
+          <div
+            class="relative item w-[450px] h-[650px]"
+            v-for="(item, index) in 6"
+            :key="index"
+          >
+            <img
+              :src="`/images/1_${index + 1}.jpg`"
+              class="w-full h-full rounded-[32px]"
+            />
+          </div>
+          <div class="sixthSectionText w-[450px] h-[650px]">
+            <p
+              class="text-[30px] font-semibold tracking-wide w-[600px] flex items-center h-full -translate-x-[200px] text-gray-500"
+            >
+              AI-generated art captivates with varied creations, sometimes
+              senseless, yet impressively enigmatic.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-[500px]">
+      <div class="px-16 text-white my-16">
+        <h2 class="text-[45px] font-bold tracking-wide">SECTION 7</h2>
+      </div>
+      <div class="relative seventhSection w-screen h-screen overflow-hidden">
+        <div
+          class="sBackground grid gap-8"
+          :class="`grid-cols-${seventhSectionDataObj.cols} grid-rows-${seventhSectionDataObj.rows}`"
+        >
+          <div
+            class="w-full h-full"
+            v-for="(item, index) in seventhSectionDataObj.cols *
+              seventhSectionDataObj.rows +
+            10"
+            :key="index"
+          >
+            <img
+              :src="`/images/7_${
+                Number(index.toString().split('').slice(-1)) + 1
+              }.jpeg`"
+              class="w-full h-full"
+            />
+          </div>
+        </div>
+        <div
+          class="absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 w-fit text-white text-[80px] font-light"
+        >
+          What is creativity?
+        </div>
+      </div>
+    </section>
+
     <section class="h-[5000px]"></section>
   </main>
 </template>
@@ -176,43 +265,14 @@ let secondSectionDataObj: {
     cols: number;
     rows: number;
   } = {
-    items: 16,
     cols: 10,
     rows: 4,
+    items: 16,
+  },
+  seventhSectionDataObj: { cols: number; rows: number } = {
+    cols: 10,
+    rows: 5,
   };
-
-const updateSecondSectionPos = (progress: number) => {
-  const secondSectionDivs =
-    document.querySelectorAll(".secondSection div") || [];
-  const translateX =
-    (window.innerWidth - secondSectionDataObj.width) * progress * 1.1;
-  const translateY =
-    (window.innerHeight - secondSectionDataObj.height) * progress * 1.1;
-  const goUpIndex = [0, 1, 2],
-    goLeftIndex = [0, 3, 6],
-    goRightIndex = [2, 5, 8],
-    goDownIndex = [6, 7, 8];
-  gsap.to(secondSectionDivs, {
-    scale: 1 + 2.5 * progress,
-    filter: `brightness(${1 - 0.5 * progress})`,
-  });
-  for (const index in secondSectionDivs) {
-    gsap.to(secondSectionDivs[index], {
-      ...(goUpIndex.includes(Number(index)) && {
-        y: -translateY + "px",
-      }),
-      ...(goDownIndex.includes(Number(index)) && {
-        y: translateY + "px",
-      }),
-      ...(goLeftIndex.includes(Number(index)) && {
-        x: -translateX + "px",
-      }),
-      ...(goRightIndex.includes(Number(index)) && {
-        x: translateX + "px",
-      }),
-    });
-  }
-};
 
 const thirdSectionImgsAdd = () => {
   const divArr = document.querySelectorAll(".thirdSection .item") || [];
@@ -273,20 +333,51 @@ onMounted(() => {
   });
 
   //SECTION 2
-  ScrollTrigger.create({
-    trigger: ".secondSection",
-    start: "center center",
-    end: "3000 center",
-    toggleActions: "restart none reverse none",
-    pin: true,
-    onUpdate: (self: { progress: number }) =>
-      updateSecondSectionPos(self.progress),
-    onLeave: () => {
-      gsap.to(".secondSectionText", {
-        y: -window.innerHeight / 2 + "px",
-        yPercent: -100,
-      });
+  const goUpIndex = [0, 1, 2],
+    goLeftIndex = [0, 3, 6],
+    goRightIndex = [2, 5, 8],
+    goDownIndex = [6, 7, 8];
+  const secondSectionTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".secondSection",
+      start: "center center",
+      end: "5000 center",
+      toggleActions: "restart none reverse none",
+      pin: true,
+      scrub: 0,
     },
+  });
+  secondSectionTimeline.to(
+    secondSectionDivs,
+    {
+      scale: 3.3,
+      filter: `brightness(0.5)`,
+    },
+    "<"
+  );
+  for (const index in secondSectionDivs) {
+    secondSectionTimeline.to(
+      secondSectionDivs[index],
+      {
+        ...(goUpIndex.includes(Number(index)) && {
+          y: -(window.innerHeight - secondSectionDataObj.height) + "px",
+        }),
+        ...(goDownIndex.includes(Number(index)) && {
+          y: window.innerHeight - secondSectionDataObj.height + "px",
+        }),
+        ...(goLeftIndex.includes(Number(index)) && {
+          x: -(window.innerWidth - secondSectionDataObj.width) + "px",
+        }),
+        ...(goRightIndex.includes(Number(index)) && {
+          x: window.innerWidth - secondSectionDataObj.width + "px",
+        }),
+      },
+      "<"
+    );
+  }
+  secondSectionTimeline.to(".secondSectionText", {
+    y: -window.innerHeight / 2 + "px",
+    yPercent: -100,
   });
 
   //SECTION 3
@@ -381,5 +472,142 @@ onMounted(() => {
     },
     "<"
   );
+
+  //SECTION 5
+  const fifthSectionImgArr =
+    document.querySelectorAll(".fifthSection .item img") || [];
+  const fifthSectionText = document.querySelector(
+    ".fifthSection .fifthSectionText p"
+  );
+  const fifthSectionItemState = Flip.getState(fifthSectionImgArr);
+  const fifthSectionTextState = Flip.getState(fifthSectionText!);
+
+  for (let i = 0; i < fifthSectionImgArr.length; i++) {
+    document
+      ?.querySelectorAll(".fifthSection .item")[0]
+      .appendChild(fifthSectionImgArr[i]);
+    gsap.set(fifthSectionImgArr[i], {
+      zIndex: i,
+    });
+  }
+  document
+    ?.querySelectorAll(".fifthSection .item")[0]
+    ?.appendChild(fifthSectionText!);
+  Flip.from(fifthSectionItemState, {
+    paused: true,
+    absolute: true,
+  });
+  Flip.from(fifthSectionTextState, {
+    paused: true,
+    absolute: true,
+  });
+
+  const fifthSectionTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".fifthSection",
+      start: "center center",
+      end: "5000 center",
+      toggleActions: "restart none reverse none",
+      pin: true,
+      scrub: 0,
+    },
+  });
+
+  for (let i = 0; i < fifthSectionImgArr.length; i++) {
+    fifthSectionTimeline.to(
+      fifthSectionImgArr[i],
+      {
+        x: i * 32,
+        opacity: 1 - i * 0.1,
+      },
+      "<"
+    );
+  }
+  fifthSectionTimeline.to(
+    fifthSectionText!,
+    {
+      x: 800,
+    },
+    "<"
+  );
+
+  //SECTION 6
+  const sixthSectionImgArr =
+    document.querySelectorAll(".sixthSection .item img") || [];
+  const sixthSectionText = document.querySelector(
+    ".sixthSection .sixthSectionText p"
+  );
+  const sixthSectionItemState = Flip.getState(sixthSectionImgArr);
+  const sixthSectionTextState = Flip.getState(sixthSectionText!);
+
+  for (let i = 0; i < sixthSectionImgArr.length; i++) {
+    document
+      ?.querySelectorAll(".sixthSection .item")[0]
+      .appendChild(sixthSectionImgArr[i]);
+    gsap.set(sixthSectionImgArr[i], {
+      zIndex: sixthSectionImgArr.length - i,
+      scale: 1,
+      filter: "brightness(1)",
+    });
+  }
+  document
+    ?.querySelectorAll(".sixthSection .item")[0]
+    ?.appendChild(sixthSectionText!);
+  Flip.from(sixthSectionItemState, {
+    paused: true,
+    absolute: true,
+  });
+  Flip.from(sixthSectionTextState, {
+    paused: true,
+    absolute: true,
+  });
+
+  const sixthSectionTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".sixthSection",
+      start: "center center",
+      end: "5000 center",
+      toggleActions: "restart none reverse none",
+      pin: true,
+      scrub: 0,
+    },
+  });
+
+  for (let i = 0; i < sixthSectionImgArr.length; i++) {
+    sixthSectionTimeline.to(
+      sixthSectionImgArr[i],
+      {
+        x: i * 32,
+        scale: 1 - i * 0.02,
+        filter: `brightness(${1 - i * 0.1})`,
+      },
+      "<"
+    );
+  }
+  sixthSectionTimeline.to(
+    sixthSectionText!,
+    {
+      x: 800,
+    },
+    "<"
+  );
+
+  //SECTION 7
+  gsap.set(".seventhSection .sBackground", {
+    scale: 3,
+    filter: "grayscale(1)",
+  });
+  gsap.to(".seventhSection .sBackground", {
+    scale: 1,
+    filter: "grayscale(0)",
+    scrollTrigger: {
+      trigger: ".seventhSection",
+      start: "center center",
+      end: "5000 center",
+      toggleActions: "reverse none restart none",
+      pin: true,
+      scrub: 0,
+    },
+  });
 });
 </script>
