@@ -49,9 +49,10 @@
       <div class="px-16 text-white my-16">
         <h2 class="text-[45px] font-bold tracking-wide">SECTION 2</h2>
       </div>
-      <div class="relative">
+      <div class="relative overflow-hidden secondSection">
+        <div class="absolute w-full h-full secondSectionMoveTo"></div>
         <div
-          class="w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] overflow-hidden secondSection"
+          class="relative w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] overflow-hidden secondSectionNeededToFit"
         >
           <div
             class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
@@ -66,7 +67,7 @@
           <div
             class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
           >
-            <img src="/images/2_3.jpg" class="w-full h-full" />
+            <img src="/images/2_3.jpg" class="w-full h-full object-cover" />
           </div>
           <div
             class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
@@ -74,8 +75,10 @@
             <img src="/images/2_4.jpg" class="w-full h-full" />
           </div>
           <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit z-50 bg-[url('/images/2_main.jpg')] bg-cover secondSectionMainImg"
-          ></div>
+            class="w-full h-full rounded-[6px] overflow-hidden z-50 secondSectionMainImg"
+          >
+            <img src="/images/2_main.jpg" class="w-full h-full object-cover" />
+          </div>
           <div
             class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
           >
@@ -97,14 +100,14 @@
             <img src="/images/2_8.jpg" class="w-full h-full" />
           </div>
         </div>
-        <div class="px-16 text-white secondSectionText">
-          <p class="text-[20px] font-semibold tracking-wide w-[450px]">
-            Within this meticulously arranged AI-generated ensemble lies a
-            tantalizing facade, captivating our gaze. Yet, as we search for the
-            soul of human expression, we question whether algorithms can truly
-            embody the essence of authentic art.
-          </p>
-        </div>
+      </div>
+      <div class="px-16 text-white secondSectionText">
+        <p class="text-[20px] font-semibold tracking-wide w-[450px]">
+          Within this meticulously arranged AI-generated ensemble lies a
+          tantalizing facade, captivating our gaze. Yet, as we search for the
+          soul of human expression, we question whether algorithms can truly
+          embody the essence of authentic art.
+        </p>
       </div>
     </section>
     <section class="mt-[500px]">
@@ -248,6 +251,11 @@
       </div>
     </section>
 
+    <section class="mt-[500px]">
+      <div class="px-16 text-white my-16">
+        <h2 class="text-[45px] font-bold tracking-wide">SECTION 8</h2>
+      </div>
+    </section>
     <section class="h-[5000px]"></section>
   </main>
 </template>
@@ -308,6 +316,9 @@ const updateSecondSectionPos = (progress: number) => {
     scale: 1 + 2.5 * progress,
     filter: `brightness(${1 - 0.5 * progress})`,
   });
+  gsap.to(".secondSectionMainImg", {
+    backgroundSize: 25 + 75 * progress + "%",
+  });
   for (const index in secondSectionDivs) {
     gsap.to(secondSectionDivs[index], {
       ...(goUpIndex.includes(Number(index)) && {
@@ -365,16 +376,20 @@ onMounted(() => {
     },
   });
 
-  //SECTION 2
-  ScrollTrigger.create({
-    trigger: ".secondSection",
-    start: "center center",
-    end: "3000 center",
-    toggleActions: "restart none reverse none",
-    pin: true,
-    onUpdate: (self: { progress: number }) =>
-      updateSecondSectionPos(Number(self.progress.toFixed(2))),
-    onLeave: () => {
+  Flip.fit(".secondSectionNeededToFit", ".secondSectionMoveTo", {
+    duration: 10,
+    ease: "power1.inOut",
+    scale: true,
+    fitChild: ".secondSectionMainImg",
+    scrollTrigger: {
+      trigger: ".secondSection",
+      start: "center center",
+      end: "4000 center",
+      toggleActions: "restart none reverse none",
+      pin: true,
+      scrub: 0,
+    },
+    onComplete: () => {
       gsap.to(".secondSectionText", {
         y: -window.innerHeight / 2 + "px",
         yPercent: -100,
