@@ -373,7 +373,7 @@ onMounted(() => {
     toggleActions: "restart none reverse none",
     pin: true,
     onUpdate: (self: { progress: number }) =>
-      updateSecondSectionPos(self.progress),
+      updateSecondSectionPos(Number(self.progress.toFixed(2))),
     onLeave: () => {
       gsap.to(".secondSectionText", {
         y: -window.innerHeight / 2 + "px",
