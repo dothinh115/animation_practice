@@ -59,49 +59,49 @@
         >
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_1.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_1.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_2.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_2.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_3.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_3.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_4.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_4.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
           <div
             class="w-full h-full rounded-[6px] overflow-hidden secondSectionMainImg"
           >
             <div
-              class="bg-[url('/images/2_main.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_main.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_5.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_5.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_6.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_6.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_7.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_7.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_8.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_8.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
             ></div>
           </div>
         </div>
@@ -386,6 +386,9 @@ onMounted(() => {
   const secondSectionDivArr = gsap.utils.toArray<Element>(
     ".secondSectionNeededToFit>div"
   );
+  const secondSectionDivInDiv = gsap.utils.toArray<Element>(
+    ".secondSectionNeededToFit>div>div"
+  );
   const movedFromOrigin = document.querySelector(".secondSectionFrom");
   for (const div of secondSectionDivArr) {
     movedFromOrigin?.appendChild(div);
@@ -409,6 +412,13 @@ onMounted(() => {
     width: "100vw",
     height: "100vh",
   });
+  secondSectionTimeline.to(
+    secondSectionDivInDiv,
+    {
+      backgroundSize: "100%",
+    },
+    "<"
+  );
   secondSectionTimeline.to(
     ".secondSectionText",
     {
