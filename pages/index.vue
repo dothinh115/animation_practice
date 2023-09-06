@@ -50,53 +50,42 @@
         <h2 class="text-[45px] font-bold tracking-wide">SECTION 2</h2>
       </div>
       <div class="relative overflow-hidden secondSection">
+        <div
+          class="absolute w-[calc(300vw)] h-[calc(300vh)] -top-[calc(100vh)] -left-[calc(100vw)] grid grid-cols-3 grid-rows-3 secondSectionFrom"
+        ></div>
         <div class="absolute w-full h-full secondSectionMoveTo"></div>
         <div
-          class="relative w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] overflow-hidden secondSectionNeededToFit"
+          class="relative w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] secondSectionNeededToFit"
         >
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
-          >
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
             <img src="/images/2_1.jpg" class="w-full h-full" />
           </div>
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
-          >
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
             <img src="/images/2_2.jpg" class="w-full h-full" />
           </div>
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
-          >
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
             <img src="/images/2_3.jpg" class="w-full h-full object-cover" />
           </div>
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
-          >
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
             <img src="/images/2_4.jpg" class="w-full h-full" />
           </div>
           <div
-            class="w-full h-full rounded-[6px] overflow-hidden z-50 secondSectionMainImg"
+            class="w-full h-full rounded-[6px] overflow-hidden secondSectionMainImg"
           >
-            <img src="/images/2_main.jpg" class="w-full h-full object-cover" />
+            <div
+              class="bg-[url('/images/2_main.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
-          >
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
             <img src="/images/2_5.jpg" class="w-full h-full" />
           </div>
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
-          >
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
             <img src="/images/2_6.jpg" class="w-full h-full" />
           </div>
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
-          >
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
             <img src="/images/2_7.jpg" class="w-full h-full" />
           </div>
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden min-h-fit min-w-fit"
-          >
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
             <img src="/images/2_8.jpg" class="w-full h-full" />
           </div>
         </div>
@@ -376,26 +365,41 @@ onMounted(() => {
     },
   });
 
-  Flip.fit(".secondSectionNeededToFit", ".secondSectionMoveTo", {
-    duration: 10,
-    ease: "power1.inOut",
-    scale: true,
-    fitChild: ".secondSectionMainImg",
+  //SECTION 2
+  const secondSectionState = Flip.getState(".secondSectionNeededToFit>div");
+  const secondSectionDivArr = gsap.utils.toArray<Element>(
+    ".secondSectionNeededToFit>div"
+  );
+  const movedFromOrigin = document.querySelector(".secondSectionFrom");
+  for (const div of secondSectionDivArr) {
+    movedFromOrigin?.appendChild(div);
+  }
+  const secondSectionTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".secondSection",
       start: "center center",
-      end: "4000 center",
+      end: "3000 center",
       toggleActions: "restart none reverse none",
       pin: true,
       scrub: 0,
     },
-    onComplete: () => {
-      gsap.to(".secondSectionText", {
-        y: -window.innerHeight / 2 + "px",
-        yPercent: -100,
-      });
-    },
   });
+  Flip.from(secondSectionState, {
+    paused: true,
+  });
+  secondSectionTimeline.to(secondSectionDivArr, {
+    x: 0,
+    y: 0,
+    width: "100vw",
+    height: "100vh",
+  });
+  secondSectionTimeline.to(
+    ".secondSectionText",
+    {
+      yPercent: -200,
+    },
+    "<"
+  );
 
   //SECTION 3
   const thirdSectionItemState = Flip.getState(thirdSectionImgArr);
