@@ -58,16 +58,24 @@
           class="relative w-screen h-screen grid grid-cols-3 grid-rows-3 gap-x-[calc(2.5vw)] gap-y-[calc(3vh)] secondSectionNeededToFit"
         >
           <div class="w-full h-full rounded-[6px] overflow-hidden">
-            <img src="/images/2_1.jpg" class="w-full h-full" />
+            <div
+              class="bg-[url('/images/2_1.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
-            <img src="/images/2_2.jpg" class="w-full h-full" />
+            <div
+              class="bg-[url('/images/2_2.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
-            <img src="/images/2_3.jpg" class="w-full h-full object-cover" />
+            <div
+              class="bg-[url('/images/2_3.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
-            <img src="/images/2_4.jpg" class="w-full h-full" />
+            <div
+              class="bg-[url('/images/2_4.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
           <div
             class="w-full h-full rounded-[6px] overflow-hidden secondSectionMainImg"
@@ -77,16 +85,24 @@
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
-            <img src="/images/2_5.jpg" class="w-full h-full" />
+            <div
+              class="bg-[url('/images/2_5.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
-            <img src="/images/2_6.jpg" class="w-full h-full" />
+            <div
+              class="bg-[url('/images/2_6.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
-            <img src="/images/2_7.jpg" class="w-full h-full" />
+            <div
+              class="bg-[url('/images/2_7.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
-            <img src="/images/2_8.jpg" class="w-full h-full" />
+            <div
+              class="bg-[url('/images/2_8.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+            ></div>
           </div>
         </div>
       </div>
