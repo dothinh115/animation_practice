@@ -293,6 +293,39 @@ const thirdSectionImgsAdd = () => {
   }
 };
 
+const updateSecondSectionPos = (progress: number) => {
+  const secondSectionDivs =
+    document.querySelectorAll(".secondSection div") || [];
+  const translateX =
+    (window.innerWidth - secondSectionDataObj.width) * progress * 1.1;
+  const translateY =
+    (window.innerHeight - secondSectionDataObj.height) * progress * 1.1;
+  const goUpIndex = [0, 1, 2],
+    goLeftIndex = [0, 3, 6],
+    goRightIndex = [2, 5, 8],
+    goDownIndex = [6, 7, 8];
+  gsap.to(secondSectionDivs, {
+    scale: 1 + 2.5 * progress,
+    filter: `brightness(${1 - 0.5 * progress})`,
+  });
+  for (const index in secondSectionDivs) {
+    gsap.to(secondSectionDivs[index], {
+      ...(goUpIndex.includes(Number(index)) && {
+        y: -translateY + "px",
+      }),
+      ...(goDownIndex.includes(Number(index)) && {
+        y: translateY + "px",
+      }),
+      ...(goLeftIndex.includes(Number(index)) && {
+        x: -translateX + "px",
+      }),
+      ...(goRightIndex.includes(Number(index)) && {
+        x: translateX + "px",
+      }),
+    });
+  }
+};
+
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, Flip);
   thirdSectionImgsAdd();
@@ -333,51 +366,20 @@ onMounted(() => {
   });
 
   //SECTION 2
-  const goUpIndex = [0, 1, 2],
-    goLeftIndex = [0, 3, 6],
-    goRightIndex = [2, 5, 8],
-    goDownIndex = [6, 7, 8];
-  const secondSectionTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".secondSection",
-      start: "center center",
-      end: "5000 center",
-      toggleActions: "restart none reverse none",
-      pin: true,
-      scrub: 0,
+  ScrollTrigger.create({
+    trigger: ".secondSection",
+    start: "center center",
+    end: "3000 center",
+    toggleActions: "restart none reverse none",
+    pin: true,
+    onUpdate: (self: { progress: number }) =>
+      updateSecondSectionPos(self.progress),
+    onLeave: () => {
+      gsap.to(".secondSectionText", {
+        y: -window.innerHeight / 2 + "px",
+        yPercent: -100,
+      });
     },
-  });
-  secondSectionTimeline.to(
-    secondSectionDivs,
-    {
-      scale: 3.3,
-      filter: `brightness(0.5)`,
-    },
-    "<"
-  );
-  for (const index in secondSectionDivs) {
-    secondSectionTimeline.to(
-      secondSectionDivs[index],
-      {
-        ...(goUpIndex.includes(Number(index)) && {
-          y: -(window.innerHeight - secondSectionDataObj.height) + "px",
-        }),
-        ...(goDownIndex.includes(Number(index)) && {
-          y: window.innerHeight - secondSectionDataObj.height + "px",
-        }),
-        ...(goLeftIndex.includes(Number(index)) && {
-          x: -(window.innerWidth - secondSectionDataObj.width) + "px",
-        }),
-        ...(goRightIndex.includes(Number(index)) && {
-          x: window.innerWidth - secondSectionDataObj.width + "px",
-        }),
-      },
-      "<"
-    );
-  }
-  secondSectionTimeline.to(".secondSectionText", {
-    y: -window.innerHeight / 2 + "px",
-    yPercent: -100,
   });
 
   //SECTION 3
