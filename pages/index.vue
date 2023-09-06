@@ -306,42 +306,6 @@ const thirdSectionImgsAdd = () => {
   }
 };
 
-const updateSecondSectionPos = (progress: number) => {
-  const secondSectionDivs =
-    document.querySelectorAll(".secondSection div") || [];
-  const translateX =
-    (window.innerWidth - secondSectionDataObj.width) * progress * 1.1;
-  const translateY =
-    (window.innerHeight - secondSectionDataObj.height) * progress * 1.1;
-  const goUpIndex = [0, 1, 2],
-    goLeftIndex = [0, 3, 6],
-    goRightIndex = [2, 5, 8],
-    goDownIndex = [6, 7, 8];
-  gsap.to(secondSectionDivs, {
-    scale: 1 + 2.5 * progress,
-    filter: `brightness(${1 - 0.5 * progress})`,
-  });
-  gsap.to(".secondSectionMainImg", {
-    backgroundSize: 25 + 75 * progress + "%",
-  });
-  for (const index in secondSectionDivs) {
-    gsap.to(secondSectionDivs[index], {
-      ...(goUpIndex.includes(Number(index)) && {
-        y: -translateY + "px",
-      }),
-      ...(goDownIndex.includes(Number(index)) && {
-        y: translateY + "px",
-      }),
-      ...(goLeftIndex.includes(Number(index)) && {
-        x: -translateX + "px",
-      }),
-      ...(goRightIndex.includes(Number(index)) && {
-        x: translateX + "px",
-      }),
-    });
-  }
-};
-
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, Flip);
   thirdSectionImgsAdd();
@@ -409,6 +373,7 @@ onMounted(() => {
   secondSectionTimeline.to(secondSectionDivArr, {
     x: 0,
     y: 0,
+    filter: "brightness(0.7)",
     width: "100vw",
     height: "100vh",
   });
