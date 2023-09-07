@@ -245,7 +245,7 @@
           </div>
         </div>
         <div
-          class="absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 w-fit text-white text-[80px] font-light"
+          class="absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 w-fit text-white text-[80px] font-light seventhSectionText"
         >
           What is creativity?
         </div>
@@ -317,7 +317,7 @@ onMounted(() => {
     scrollTrigger: {
       trigger: ".firstSection",
       start: "center center",
-      end: "3000 center",
+      end: "2000 center",
       toggleActions: "restart none reverse none",
       pin: true,
       scrub: 0,
@@ -345,7 +345,7 @@ onMounted(() => {
     scrollTrigger: {
       trigger: ".secondSection",
       start: "center center",
-      end: "3000 center",
+      end: "2000 center",
       toggleActions: "restart none reverse none",
       pin: true,
       scrub: 0,
@@ -402,7 +402,7 @@ onMounted(() => {
     scrollTrigger: {
       trigger: ".thirdSection",
       start: "center center",
-      end: "12000 center",
+      end: "5000 center",
       toggleActions: "restart none reverse none",
       pin: true,
       scrub: 0,
@@ -448,7 +448,7 @@ onMounted(() => {
     scrollTrigger: {
       trigger: ".fourthSection",
       start: "center center",
-      end: "5000 center",
+      end: "3000 center",
       toggleActions: "restart none reverse none",
       pin: true,
       scrub: 0,
@@ -506,7 +506,7 @@ onMounted(() => {
     scrollTrigger: {
       trigger: ".fifthSection",
       start: "center center",
-      end: "5000 center",
+      end: "3000 center",
       toggleActions: "restart none reverse none",
       pin: true,
       scrub: 0,
@@ -566,7 +566,7 @@ onMounted(() => {
     scrollTrigger: {
       trigger: ".sixthSection",
       start: "center center",
-      end: "5000 center",
+      end: "3000 center",
       toggleActions: "restart none reverse none",
       pin: true,
       scrub: 0,
@@ -593,21 +593,39 @@ onMounted(() => {
   );
 
   //SECTION 7
-  gsap.set(".seventhSection .sBackground", {
-    scale: 3,
-    filter: "grayscale(1)",
-  });
-  gsap.to(".seventhSection .sBackground", {
-    scale: 1,
-    filter: "grayscale(0)",
+  const seventhSectionTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".seventhSection",
       start: "center center",
-      end: "5000 center",
+      end: "3000 center",
       toggleActions: "reverse none restart none",
       pin: true,
       scrub: 0,
     },
   });
+  gsap.set(".seventhSection .sBackground", {
+    scale: 3.5,
+    filter: "grayscale(1)",
+  });
+
+  gsap.set(".seventhSectionText", {
+    opacity: 0,
+  });
+
+  seventhSectionTimeline.to(
+    ".seventhSection .sBackground",
+    {
+      scale: 1,
+      filter: "grayscale(0)",
+    },
+    "<"
+  );
+  seventhSectionTimeline.to(
+    ".seventhSectionText",
+    {
+      opacity: 1,
+    },
+    "<"
+  );
 });
 </script>
