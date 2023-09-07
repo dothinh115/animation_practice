@@ -59,49 +59,49 @@
         >
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_1.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_1.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_2.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_2.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_3.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_3.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_4.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_4.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div
             class="w-full h-full rounded-[6px] overflow-hidden secondSectionMainImg"
           >
             <div
-              class="bg-[url('/images/2_main.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_main.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_5.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_5.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_6.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_6.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_7.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_7.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_8.jpg')] bg-cover bg-fixed bg-center bg-[length:10vw_10vh] w-full h-full"
+              class="bg-[url('/images/2_8.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
         </div>
@@ -269,11 +269,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flip } from "gsap/Flip";
 
-let secondSectionDataObj: {
-    width: number;
-    height: number;
-  },
-  thirdSectionDataObj: {
+let thirdSectionDataObj: {
     items: number;
     cols: number;
     rows: number;
@@ -316,14 +312,6 @@ onMounted(() => {
   gsap.set([".firstSectionMainImg", ...secondSectionDivs], {
     filter: "brightness(1)",
   });
-  secondSectionDataObj = {
-    width:
-      document.querySelector<HTMLElement>(".secondSectionMainImg")
-        ?.offsetWidth || 0,
-    height:
-      document.querySelector<HTMLElement>(".secondSectionMainImg")
-        ?.offsetHeight || 0,
-  };
 
   //SECTION 1
   gsap.to(".firstSectionMainImg", {
