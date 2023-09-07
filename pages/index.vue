@@ -59,49 +59,47 @@
         >
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_1.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_1.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_2.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_2.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_3.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_3.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_4.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
-            ></div>
-          </div>
-          <div
-            class="w-full h-full rounded-[6px] overflow-hidden secondSectionMainImg"
-          >
-            <div
-              class="bg-[url('/images/2_main.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full bg-cover"
+              class="bg-[url('/images/2_4.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_5.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_main.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_6.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_5.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_7.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_6.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_8.jpg')] bg-cover bg-fixed bg-center bg-[length:100vw_100vh] w-full h-full"
+              class="bg-[url('/images/2_7.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
+            ></div>
+          </div>
+          <div class="w-full h-full rounded-[6px] overflow-hidden">
+            <div
+              class="bg-[url('/images/2_8.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
         </div>
@@ -358,13 +356,24 @@ onMounted(() => {
   Flip.from(secondSectionState, {
     paused: true,
   });
-  secondSectionTimeline.to(secondSectionDivArr, {
-    x: 0,
-    y: 0,
-    filter: "brightness(0.7)",
-    width: "100vw",
-    height: "100vh",
-  });
+  secondSectionTimeline.to(
+    secondSectionDivArr,
+    {
+      x: 0,
+      y: 0,
+      filter: "brightness(0.7)",
+      width: "100vw",
+      height: "100vh",
+    },
+    "<"
+  );
+  secondSectionTimeline.to(
+    secondSectionDivInDiv,
+    {
+      backgroundSize: "100%",
+    },
+    "<"
+  );
   secondSectionTimeline.to(
     ".secondSectionText",
     {
