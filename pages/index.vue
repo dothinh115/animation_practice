@@ -239,9 +239,7 @@
             :key="index"
           >
             <img
-              :src="`/images/7_${
-                Number(index.toString().split('').slice(-1)) + 1
-              }.jpeg`"
+              :src="`/images/7_${Math.ceil(Math.random() * 10)}.jpeg`"
               class="w-full h-full"
             />
           </div>
