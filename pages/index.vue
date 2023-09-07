@@ -59,7 +59,7 @@
         >
           <div class="w-full h-full rounded-[6px] overflow-hidden">
             <div
-              class="bg-[url('/images/2_1.jpg')] bg-cover bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
+              class="bg-[url('/images/2_1.jpg')] bg-fixed bg-center bg-[length:15vw_15vh] w-full h-full"
             ></div>
           </div>
           <div class="w-full h-full rounded-[6px] overflow-hidden">
